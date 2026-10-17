@@ -1,9 +1,13 @@
 # AI Chat for Legacy iOS
 
 A small, lightweight AI chat app for jailbroken old iOS devices, using Google's
-Gemini API and its free tier. Built and tested on an **iPod touch 5th gen (iOS 9.3.5, armv7)**.
+Gemini API and its free tier. Built and tested on an **iPod touch 5th gen (iOS 9.3.5)**.
 
 > Made with AI assistance (Claude). Tested only on an iPod touch 5. Bug reports welcome.
+
+## Download
+Get the latest `.ipa` or `.deb` from the
+[Releases page](https://github.com/m4xd11/AIChat-Legacy-iOS/releases/latest).
 
 ## Features
 - Dark and light themes (saved between launches)
@@ -11,41 +15,38 @@ Gemini API and its free tier. Built and tested on an **iPod touch 5th gen (iOS 9
 - Chat history saved on the device
 - Optional system prompt (e.g. "answer briefly")
 - Tap a message to copy it
-- Built to stay cool: no blur, shadows, gradients or timers; animations only run on demand
+- Built to stay cool: no blur, shadows, gradients or timers
 
-## What you need
-- A jailbroken iOS 6+ device (tested on iOS 9.3.5)
-- A free Gemini API key from https://aistudio.google.com/apikey
-- [Theos](https://theos.dev) to build it, with an iOS SDK that supports armv7 (for example iOS 9.3)
+## Install
+You need a jailbroken device.
 
-## Build
+**.ipa:** install **AppSync Unified** from Cydia/Sileo first, then open the `.ipa`
+in Filza and tap Install.
+
+**.deb:** open it in Filza and tap Install (no AppSync needed), then respring or run `uicache`.
+
+## First-time setup
+1. Get a free API key at https://aistudio.google.com/apikey
+2. Open the app (Settings opens by itself the first time) and paste your key.
+3. Leave the model as `gemini-3.8-flash`. Google retires models over time, so change
+   it if you see a "model no longer available" error.
+4. Chat!
+
+## Privacy and limits
+- Your API key is stored unencrypted in the app's preferences on your device.
+- Messages go to Google's servers. On the free tier, Google may use prompts to improve
+  its models, so don't send private info.
+- The free tier has rate limits.
+- iOS 9 has old root certificates, so TLS errors are possible on some networks.
+
+## Build from source (developers)
+Needs [Theos](https://theos.dev) and an armv7-capable iOS SDK (e.g. iOS 9.3).
 ```
 export THEOS=~/theos
 make clean
 make package
 ```
-This makes a `.deb` in `packages/`. Install it with Filza or `dpkg -i`, then run `uicache`.
-
-To make an `.ipa` instead:
-```
-make stage
-mkdir Payload
-cp -r .theos/_/Applications/AIChat.app Payload/
-zip -r AIChat.ipa Payload
-```
-(The staged app path can vary with your Theos version.)
-
-## Use
-1. Open the app. Settings opens by itself the first time.
-2. Paste your Gemini API key.
-3. Set the model name (default: `gemini-3.8-flash`). Google retires models over time, so change this if you get a "model no longer available" error.
-4. Chat.
-
-## Privacy and limits
-- Your API key is stored unencrypted in the app's preferences on your device.
-- Messages are sent to Google's servers. On the free tier, Google may use prompts to improve its models, so don't send private info.
-- The free tier has rate limits.
-- iOS 9 has old root certificates, so TLS errors are possible on some networks.
+For an `.ipa`: run `make stage`, copy the staged `AIChat.app` into a `Payload` folder, and zip it.
 
 ## Similar projects
 - [ChatGPT for Legacy iOS](https://github.com/bag-xml/ChatGPT-for-Legacy-iOS): an OpenAI client for iOS 6+.
