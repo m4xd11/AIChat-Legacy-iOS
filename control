@@ -1,0 +1,9 @@
+Package: com.user.aichat
+Name: AI Chat
+Depends: firmware (>= 6.0)
+Version: 1.2
+Architecture: iphoneos-arm
+Description: Simple AI chat app (Gemini API)
+Maintainer: you
+Author: you
+Section: Utilities
